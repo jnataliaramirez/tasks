@@ -1,8 +1,9 @@
+import './styles.css'
 
 const ListTasks = (props) => {
   return (
     <section>
-      <ul>
+      <ul className='listTasks__list' >
         {props.children}
       </ul>
     </section>
