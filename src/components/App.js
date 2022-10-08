@@ -2,7 +2,7 @@ import { CounterTasks } from "./CounterTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 import { ItemTask } from "./ItemTask";
 import { ListTasks } from "./ListTasks";
-import { SearchTask } from "./SearchTask";
+import { SearchTask } from "./SearchTask/index.ts";
 
 const infoTasks = [
   {
