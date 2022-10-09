@@ -1,11 +1,13 @@
 import React from "react";
-import './styles.css'
+import "./styles.css";
 
-const CounterTasks = () => {
+const CounterTasks = (props) => {
   return (
     <>
-      <h1 className="counterTasks__title" > Este es tu gestor de tareas :) </h1>
-      <h3 className="counterTasks__title"> Haz realizado 2 tareas de 10  </h3>
+      <h1 className="counterTasks__title"> Este es tu gestor de tareas :) </h1>
+      <h3 className="counterTasks__title">
+        Haz realizado {props.completedTasks} tareas de {props.totalTasks}
+      </h3>
     </>
   );
 };

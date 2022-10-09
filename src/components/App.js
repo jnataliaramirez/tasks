@@ -24,12 +24,18 @@ const infoTasks = [
   {
     id: 4,
     task: "Dar estilos al proyecto",
-    done: false,
+    done: true,
   },
 ];
 
 const App = () => {
+  const [newTask, setNewTask] = useState([...infoTasks]);
   const [searchValue, setSearchValue] = useState("");
+
+  const completedTasks = newTask.filter(
+    (completed) => completed.done === true
+  ).length;
+  const totalTasks = newTask.length;
 
   const handlerInput = (value) => {
     setSearchValue(value);
@@ -37,7 +43,7 @@ const App = () => {
 
   return (
     <>
-      <CounterTasks />
+      <CounterTasks completedTasks={completedTasks} totalTasks={totalTasks} />
       <SearchTask value={searchValue} changeValue={handlerInput} />
       <CreateTaskButton />
       <ListTasks>
