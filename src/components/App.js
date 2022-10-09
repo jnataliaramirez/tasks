@@ -29,17 +29,34 @@ const infoTasks = [
 ];
 
 const App = () => {
-  const [newTask, setNewTask] = useState([...infoTasks]);
+  //* States
+  const [tasks, setTasks] = useState(infoTasks);
   const [searchValue, setSearchValue] = useState("");
+  console.log("tasks :>> ", tasks);
 
-  const completedTasks = newTask.filter(
-    (completed) => completed.done === true
-  ).length;
-  const totalTasks = newTask.length;
-
+  //* Handlers
   const handlerInput = (value) => {
     setSearchValue(value);
   };
+
+  //* Counter Tasks Logic
+  const completedTasks = tasks.filter(
+    (completed) => completed.done === true
+  ).length;
+  const totalTasks = tasks.length;
+
+  //* SearchTask Logic
+  let searchedTaks = [];
+
+  if (searchValue.length < 1) {
+    searchedTaks = tasks;
+  } else {
+    searchedTaks = tasks.filter((task) => {
+      const taskText = task.task.toLocaleLowerCase();
+      const searchText = searchValue.toLocaleLowerCase();
+      return taskText.includes(searchText);
+    });
+  }
 
   return (
     <>
@@ -47,8 +64,8 @@ const App = () => {
       <SearchTask value={searchValue} changeValue={handlerInput} />
       <CreateTaskButton />
       <ListTasks>
-        {infoTasks.map((item) => (
-          <ItemTask key={item.id} text={item.task} />
+        {searchedTaks.map((item) => (
+          <ItemTask key={item.id} text={item.task} completed={item.done} />
         ))}
       </ListTasks>
     </>
