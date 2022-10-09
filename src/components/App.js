@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { CounterTasks } from "./CounterTasks";
 import { CreateTaskButton } from "./CreateTaskButton";
 import { ItemTask } from "./ItemTask";
@@ -28,10 +29,16 @@ const infoTasks = [
 ];
 
 const App = () => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handlerInput = (value) => {
+    setSearchValue(value);
+  };
+
   return (
     <>
       <CounterTasks />
-      <SearchTask />
+      <SearchTask value={searchValue} changeValue={handlerInput} />
       <CreateTaskButton />
       <ListTasks>
         {infoTasks.map((item) => (
