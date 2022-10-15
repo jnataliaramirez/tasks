@@ -58,6 +58,14 @@ const App = () => {
     });
   }
 
+  //* Check task Logic
+  const completeTask = (id) => {
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    const newTasks = [...tasks];
+    newTasks[taskIndex].completed = true;
+    setTasks(newTasks);
+  };
+
   return (
     <>
       <CounterTasks completedTasks={completedTasks} totalTasks={totalTasks} />
