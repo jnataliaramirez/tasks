@@ -1,10 +1,7 @@
 import React from "react";
 import { TodoIcon } from "./";
 
-function CompleteIcon({ completed }) {
-  const onComplete = () => {
-    alert("Tarea completada");
-  };
+function CompleteIcon({ onComplete, completed }) {
 
   return (
     <TodoIcon

@@ -6,7 +6,7 @@ import "./styles.css";
 const ItemTask = (props) => {
   return (
     <li className="itemTasks__list">
-      <CompleteIcon completed={props.completed} />
+      <CompleteIcon completed={props.completed} onComplete={props.onComplete} />
       <p
         className={`itemTasks__paragraph ${
           props.completed && "itemTasks__paragraph--completed"
@@ -14,9 +14,10 @@ const ItemTask = (props) => {
       >
         {props.text}
       </p>
-      <DeleteIcon />
+      <DeleteIcon onDelete={props.onDelete} />
     </li>
   );
 };
 
 export { ItemTask };
+ 

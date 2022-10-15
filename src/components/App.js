@@ -32,7 +32,6 @@ const App = () => {
   //* States
   const [tasks, setTasks] = useState(infoTasks);
   const [searchValue, setSearchValue] = useState("");
-  console.log("tasks :>> ", tasks);
 
   //* Handlers
   const handlerInput = (value) => {
@@ -62,9 +61,26 @@ const App = () => {
   const completeTask = (id) => {
     const taskIndex = tasks.findIndex((task) => task.id === id);
     const newTasks = [...tasks];
-    newTasks[taskIndex].completed = true;
+
+    if (newTasks[taskIndex].done) {
+      newTasks[taskIndex].done = false;
+    } else {
+      newTasks[taskIndex].done = true;
+    }
+
     setTasks(newTasks);
   };
+
+  //* Delete task Logic
+  const deleteTask = (id) => {
+    const taskIndex = tasks.findIndex((task) => task.id === id);
+    const newTasks = [...tasks];
+
+    newTasks.splice(taskIndex, 1);
+
+    setTasks(newTasks);
+  };
+
 
   return (
     <>
@@ -73,7 +89,13 @@ const App = () => {
       <CreateTaskButton />
       <ListTasks>
         {searchedTaks.map((item) => (
-          <ItemTask key={item.id} text={item.task} completed={item.done} />
+          <ItemTask
+            key={item.id}
+            text={item.task}
+            completed={item.done}
+            onComplete={() => completeTask(item.id)}
+            onDelete={() => deleteTask(item.id)}
+          />
         ))}
       </ListTasks>
     </>
