@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 
-const SearchTask = (props) => {
+const SearchTask = ( props ) => {
   const onChangeValue = (event) => {
     props.changeValue(event.target.value);
   };

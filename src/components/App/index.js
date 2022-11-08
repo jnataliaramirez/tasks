@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { CounterTasks } from "./CounterTasks";
-import { CreateTaskButton } from "./CreateTaskButton";
-import { ItemTask } from "./ItemTask";
-import { ListTasks } from "./ListTasks";
-import { SearchTask } from "./SearchTask/index.ts";
+
+import { AppUI } from "./AppUI";
 
 const infoTasks = [
   {
@@ -81,24 +78,16 @@ const App = () => {
     setTasks(newTasks);
   };
 
-
   return (
-    <>
-      <CounterTasks completedTasks={completedTasks} totalTasks={totalTasks} />
-      <SearchTask value={searchValue} changeValue={handlerInput} />
-      <CreateTaskButton />
-      <ListTasks>
-        {searchedTaks.map((item) => (
-          <ItemTask
-            key={item.id}
-            text={item.task}
-            completed={item.done}
-            onComplete={() => completeTask(item.id)}
-            onDelete={() => deleteTask(item.id)}
-          />
-        ))}
-      </ListTasks>
-    </>
+    <AppUI 
+      completedTasks={completedTasks} 
+      totalTasks={totalTasks}
+      searchedTaks={searchedTaks}
+      searchValue={searchValue} 
+      changeValue={handlerInput}
+      completeTask={completeTask}
+      deleteTask={deleteTask}
+    />
   );
 };
 
