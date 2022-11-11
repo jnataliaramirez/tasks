@@ -1,29 +1,14 @@
 import React, { useState } from "react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 import { AppUI } from "./AppUI";
 
-
 const App = () => {
-  //* Local Storage
-  const localStorageTasks = localStorage.getItem("TASKS_V1");
-  let parsedTasks;
-
-  if (!localStorageTasks) {
-    localStorage.setItem("TASKS_V1", JSON.stringify([]));
-    parsedTasks = [];
-  } else {
-    parsedTasks = JSON.parse(localStorageTasks);
-  }
+  //* Hooks
+  const [tasks, saveTasks] = useLocalStorage("TASKS_V1", []);
 
   //* States
-  const [tasks, setTasks] = useState(parsedTasks);
   const [searchValue, setSearchValue] = useState("");
-
-  const saveTasks = (newTasks) => {
-    const stringifiedTasks = JSON.stringify(newTasks);
-    localStorage.setItem("TASKS_V1", stringifiedTasks);
-    setTasks(newTasks);
-  };
 
   //* Handlers
   const handlerInput = (value) => {
