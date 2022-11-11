@@ -2,33 +2,28 @@ import React, { useState } from "react";
 
 import { AppUI } from "./AppUI";
 
-const infoTasks = [
-  {
-    id: 1,
-    task: "Hacer el repaso de React básico",
-    done: false,
-  },
-  {
-    id: 2,
-    task: "Hacer el proyecto de React básico",
-    done: false,
-  },
-  {
-    id: 3,
-    task: "Repasar y entender nuevos conceptos mientras estudio",
-    done: false,
-  },
-  {
-    id: 4,
-    task: "Dar estilos al proyecto",
-    done: true,
-  },
-];
 
 const App = () => {
+  //* Local Storage
+  const localStorageTasks = localStorage.getItem("TASKS_V1");
+  let parsedTasks;
+
+  if (!localStorageTasks) {
+    localStorage.setItem("TASKS_V1", JSON.stringify([]));
+    parsedTasks = [];
+  } else {
+    parsedTasks = JSON.parse(localStorageTasks);
+  }
+
   //* States
-  const [tasks, setTasks] = useState(infoTasks);
+  const [tasks, setTasks] = useState(parsedTasks);
   const [searchValue, setSearchValue] = useState("");
+
+  const saveTasks = (newTasks) => {
+    const stringifiedTasks = JSON.stringify(newTasks);
+    localStorage.setItem("TASKS_V1", stringifiedTasks);
+    setTasks(newTasks);
+  };
 
   //* Handlers
   const handlerInput = (value) => {
@@ -65,7 +60,7 @@ const App = () => {
       newTasks[taskIndex].done = true;
     }
 
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
 
   //* Delete task Logic
@@ -75,15 +70,15 @@ const App = () => {
 
     newTasks.splice(taskIndex, 1);
 
-    setTasks(newTasks);
+    saveTasks(newTasks);
   };
 
   return (
-    <AppUI 
-      completedTasks={completedTasks} 
+    <AppUI
+      completedTasks={completedTasks}
       totalTasks={totalTasks}
       searchedTaks={searchedTaks}
-      searchValue={searchValue} 
+      searchValue={searchValue}
       changeValue={handlerInput}
       completeTask={completeTask}
       deleteTask={deleteTask}
