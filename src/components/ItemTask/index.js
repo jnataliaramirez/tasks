@@ -1,6 +1,6 @@
 import React from "react";
-import { CompleteIcon } from "../TodoIcon/CompleteIcon";
-import { DeleteIcon } from "../TodoIcon/DeleteIcon";
+import { CompleteIcon } from "../TodoIcon/_components/Complete/CompleteIcon";
+import { DeleteIcon } from "../TodoIcon/_components/Delete/DeleteIcon";
 import "./styles.css";
 
 const ItemTask = (props) => {
@@ -20,4 +20,3 @@ const ItemTask = (props) => {
 };
 
 export { ItemTask };
- 
