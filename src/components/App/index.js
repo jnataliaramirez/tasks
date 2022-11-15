@@ -5,7 +5,13 @@ import { AppUI } from "./AppUI";
 
 const App = () => {
   //* Hooks
-  const [tasks, saveTasks] = useLocalStorage("TASKS_V1", []);
+  // Desestructuración de los datos del hook useEffect
+  const {
+    item: tasks,
+    saveItem: saveTasks,
+    loading,
+    error,
+  } = useLocalStorage("TASKS_V1", []);
 
   //* States
   const [searchValue, setSearchValue] = useState("");
@@ -67,6 +73,8 @@ const App = () => {
       changeValue={handlerInput}
       completeTask={completeTask}
       deleteTask={deleteTask}
+      loading={loading}
+      error={error}
     />
   );
 };
