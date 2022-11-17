@@ -3,7 +3,7 @@ import "./styles.css";
 
 const SearchTask = ( props ) => {
   const onChangeValue = (event) => {
-    props.changeValue(event.target.value);
+    props.handlerInput(event.target.value);
   };
 
   return (
