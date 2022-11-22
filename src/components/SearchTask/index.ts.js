@@ -1,9 +1,13 @@
 import React from "react";
+import { useContext } from "react";
+import { TasksContext } from "../TasksContext";
 import "./styles.css";
 
-const SearchTask = ( props ) => {
+const SearchTask = () => {
+  const { searchValue,  handlerInput } = useContext(TasksContext);
+
   const onChangeValue = (event) => {
-    props.handlerInput(event.target.value);
+    handlerInput(event.target.value);
   };
 
   return (
@@ -12,7 +16,7 @@ const SearchTask = ( props ) => {
         className="searchTask__input"
         type="text"
         placeholder="Ingresa tu nueva tarea"
-        value={props.value}
+        value={searchValue}
         onChange={onChangeValue}
       />
     </>
