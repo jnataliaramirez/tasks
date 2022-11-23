@@ -15,6 +15,8 @@ const TasksProvider = (props) => {
 
   //* States
   const [searchValue, setSearchValue] = useState("");
+  // State for modal
+  const [openModal, setOpenModal] = useState(false);
 
   //* Handlers
   const handlerInput = (value) => {
@@ -76,6 +78,8 @@ const TasksProvider = (props) => {
         deleteTask,
         loading,
         error,
+        openModal,
+        setOpenModal, 
       }}
     >
       {props.children}

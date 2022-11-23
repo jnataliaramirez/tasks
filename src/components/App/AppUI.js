@@ -4,18 +4,25 @@ import { CounterTasks } from "../CounterTasks";
 import { CreateTaskButton } from "../CreateTaskButton";
 import { ItemTask } from "../ItemTask";
 import { ListTasks } from "../ListTasks";
+import { Modal } from "../Modal";
 import { SearchTask } from "../SearchTask/index.ts";
 import { TasksContext } from "../TasksContext";
 
 const AppUI = () => {
-  const { error, loading, searchedTaks, completeTask, deleteTask } =
-    useContext(TasksContext);
+  const {
+    error,
+    loading,
+    searchedTaks,
+    completeTask,
+    deleteTask,
+    openModal,
+    setOpenModal,
+  } = useContext(TasksContext);
 
   return (
     <>
       <CounterTasks />
       <SearchTask />
-      <CreateTaskButton />
       <ListTasks>
         {error && <p>Hubo un error</p>}
         {loading && <p>Cargando ...</p>}
@@ -30,6 +37,14 @@ const AppUI = () => {
           />
         ))}
       </ListTasks>
+
+      {openModal && (
+        <Modal>
+          <p>Hola Nati presente ! </p>
+        </Modal>
+      )}
+
+      <CreateTaskButton openModal={openModal} setOpenModal={setOpenModal} />
     </>
   );
 };

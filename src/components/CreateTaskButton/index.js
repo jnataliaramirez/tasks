@@ -1,9 +1,9 @@
 import { React } from "react";
 import "./styles.css";
 
-const CreateTaskButton = () => {
+const CreateTaskButton = (props) => {
   const handlerNewTaks = () => {
-    alert("Añadir tarea");
+    props.setOpenModal(!props.openModal);
   };
 
   return (
