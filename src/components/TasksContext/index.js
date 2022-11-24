@@ -30,12 +30,12 @@ const TasksProvider = (props) => {
   const totalTasks = tasks.length;
 
   //* SearchTask Logic
-  let searchedTaks = [];
+  let searchedTasks = [];
 
   if (searchValue.length < 1) {
-    searchedTaks = tasks;
+    searchedTasks = tasks;
   } else {
-    searchedTaks = tasks.filter((task) => {
+    searchedTasks = tasks.filter((task) => {
       const taskText = task.task.toLocaleLowerCase();
       const searchText = searchValue.toLocaleLowerCase();
       return taskText.includes(searchText);
@@ -43,6 +43,15 @@ const TasksProvider = (props) => {
   }
 
   //* Check task Logic
+  const addTask = (text) => {
+    const newTasks = [...tasks];
+    newTasks.push({
+      done: false,
+      text: text,
+    });
+    saveTasks(newTasks);
+  };
+
   const completeTask = (id) => {
     const taskIndex = tasks.findIndex((task) => task.id === id);
     const newTasks = [...tasks];
@@ -71,7 +80,7 @@ const TasksProvider = (props) => {
       value={{
         completedTasks,
         totalTasks,
-        searchedTaks,
+        searchedTasks,
         searchValue,
         handlerInput,
         completeTask,
@@ -79,7 +88,8 @@ const TasksProvider = (props) => {
         loading,
         error,
         openModal,
-        setOpenModal, 
+        setOpenModal,
+        addTask,
       }}
     >
       {props.children}

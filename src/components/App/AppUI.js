@@ -5,14 +5,15 @@ import { CreateTaskButton } from "../CreateTaskButton";
 import { ItemTask } from "../ItemTask";
 import { ListTasks } from "../ListTasks";
 import { Modal } from "../Modal";
-import { SearchTask } from "../SearchTask/index.ts";
+import { SearchTask } from "../SearchTask";
+import { TaskForm } from "../TaskForm";
 import { TasksContext } from "../TasksContext";
 
 const AppUI = () => {
   const {
     error,
     loading,
-    searchedTaks,
+    searchedTasks,
     completeTask,
     deleteTask,
     openModal,
@@ -26,11 +27,11 @@ const AppUI = () => {
       <ListTasks>
         {error && <p>Hubo un error</p>}
         {loading && <p>Cargando ...</p>}
-        {!loading && !searchedTaks.length && <p>¡Crea tu primera tarea!</p>}
-        {searchedTaks.map((item) => (
+        {!loading && !searchedTasks.length && <p>¡Crea tu primera tarea!</p>}
+        {searchedTasks.map((item) => (
           <ItemTask
-            key={item.id}
-            text={item.task}
+            key={item.text}
+            text={item.text}
             completed={item.done}
             onComplete={() => completeTask(item.id)}
             onDelete={() => deleteTask(item.id)}
@@ -40,11 +41,11 @@ const AppUI = () => {
 
       {openModal && (
         <Modal>
-          <p>Hola Nati presente ! </p>
+          <TaskForm />
         </Modal>
       )}
 
-      <CreateTaskButton openModal={openModal} setOpenModal={setOpenModal} />
+      <CreateTaskButton setOpenModal={setOpenModal} />
     </>
   );
 };

@@ -3,7 +3,7 @@ import "./styles.css";
 
 const CreateTaskButton = (props) => {
   const handlerNewTaks = () => {
-    props.setOpenModal(!props.openModal);
+    props.setOpenModal(prevState => !prevState);
   };
 
   return (
