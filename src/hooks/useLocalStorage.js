@@ -23,11 +23,12 @@ export const useLocalStorage = (itemLocalStorage, initialValue) => {
         } else {
           parsedItem = JSON.parse(localStorageItem);
         }
+
+        setItem(parsedItem);
       } catch (error) {
         // En caso de un error se guarda en el estado error
         setError(error);
       } finally {
-        // Cuando termine se devolvera un loading false ya que habra terminado la tarea
         setLoading(false);
       }
     }, 1000);
