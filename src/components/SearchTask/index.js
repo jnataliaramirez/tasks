@@ -4,22 +4,20 @@ import { TasksContext } from "../TasksContext";
 import "./styles.css";
 
 const SearchTask = () => {
-  const { searchValue,  handlerInput } = useContext(TasksContext);
+  const { searchValue, setSearchValue } = useContext(TasksContext);
 
   const onChangeValue = (event) => {
-    handlerInput(event.target.value);
+    setSearchValue(event.target.value);
   };
 
   return (
-    <>
-      <input
-        className="searchTask__input"
-        type="text"
-        placeholder="Ingresa tu nueva tarea"
-        value={searchValue}
-        onChange={onChangeValue}
-      />
-    </>
+    <input
+      className="searchTask__input"
+      type="text"
+      placeholder="Ingresa tu nueva tarea"
+      value={searchValue}
+      onChange={onChangeValue}
+    />
   );
 };
 

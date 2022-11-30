@@ -33,8 +33,8 @@ const AppUI = () => {
             key={item.text}
             text={item.text}
             completed={item.done}
-            onComplete={() => completeTask(item.id)}
-            onDelete={() => deleteTask(item.id)}
+            onComplete={() => completeTask(item.text)}
+            onDelete={() => deleteTask(item.text)}
           />
         ))}
       </ListTasks>

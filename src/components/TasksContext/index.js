@@ -18,11 +18,6 @@ const TasksProvider = (props) => {
   // State for modal
   const [openModal, setOpenModal] = useState(false);
 
-  //* Handlers
-  const handlerInput = (value) => {
-    setSearchValue(value);
-  };
-
   //* Counter Tasks Logic
   const completedTasks = tasks.filter(
     (completed) => completed.done === true
@@ -32,11 +27,11 @@ const TasksProvider = (props) => {
   //* SearchTask Logic
   let searchedTasks = [];
 
-  if (searchValue.length < 1) {
+  if (searchValue.length <= 1) {
     searchedTasks = tasks;
   } else {
     searchedTasks = tasks.filter((task) => {
-      const taskText = task.task.toLocaleLowerCase();
+      const taskText = task.text.toLocaleLowerCase();
       const searchText = searchValue.toLocaleLowerCase();
       return taskText.includes(searchText);
     });
@@ -52,22 +47,22 @@ const TasksProvider = (props) => {
     saveTasks(newTasks);
   };
 
-  const completeTask = (id) => {
-    const taskIndex = tasks.findIndex((task) => task.id === id);
+  const completeTask = (text) => {
+    const taskIndex = tasks.findIndex((task) => task.text === text);
     const newTasks = [...tasks];
 
-    if (newTasks[taskIndex].done) {
-      newTasks[taskIndex].done = false;
-    } else {
+    if (!newTasks[taskIndex].done) {
       newTasks[taskIndex].done = true;
+    } else {
+      newTasks[taskIndex].done = false;
     }
 
     saveTasks(newTasks);
   };
 
   //* Delete task Logic
-  const deleteTask = (id) => {
-    const taskIndex = tasks.findIndex((task) => task.id === id);
+  const deleteTask = (text) => {
+    const taskIndex = tasks.findIndex((task) => task.text === text);
     const newTasks = [...tasks];
 
     newTasks.splice(taskIndex, 1);
@@ -82,7 +77,7 @@ const TasksProvider = (props) => {
         totalTasks,
         searchedTasks,
         searchValue,
-        handlerInput,
+        setSearchValue,
         completeTask,
         deleteTask,
         loading,
